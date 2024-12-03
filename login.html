@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Login</title>
+    <link rel="stylesheet" href="authstyle.css">
+  </head>
+  <body>
+
+    <div class="wrapper" id="load">
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="shadow"></div>
+      <div class="shadow"></div>
+      <div class="shadow"></div>
+      <span>Loading</span>
+    </div>
+
+
+    <form class="container" id="login-form">
+      <h2>Login</h2>
+      <input type="email" id="email" placeholder="Email" required />
+      <input type="password" id="password" placeholder="Password" required />
+      <button type="submit" id="log">Login</button>
+      <label id="icd" style="display: none;">increct username or passwprd</label>
+      <div style="margin-top: 5%">
+        <label>new here..</label>
+        <a href="register.html">register</a>
+      </div>
+    </form>
+    <script type="module" >
+      
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+      import { getAuth, signInWithEmailAndPassword ,onAuthStateChanged} from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+      
+      const firebaseConfig = {
+    apiKey: "AIzaSyCnImhv11CepvfX4pSIsNwKbCPwu6df_6Q",
+    authDomain: "sleeper-ad2ef.firebaseapp.com",
+    projectId: "sleeper-ad2ef",
+    storageBucket: "sleeper-ad2ef.firebasestorage.app",
+    messagingSenderId: "319629128838",
+    appId: "1:319629128838:web:a9ca546bcf2acfd6160d07"
+  };
+        
+
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
+      
+  
+            var log = document.getElementById('log');
+            const load = document.getElementById('load');
+            const form = document.getElementById('login-form');
+            const icd = document.getElementById('icd');
+            log.addEventListener("click",function(event){
+                  event.preventDefault();
+                  
+                  const password = document.getElementById('password').value;
+                  const email = document.getElementById('email').value;
+                  
+                  const auth = getAuth();
+                  signInWithEmailAndPassword(auth, email, password)
+                  .then((userCredential) => {
+                    const user = userCredential.user;
+                    // Signed up
+                    form.style.display='none';
+                    load.style.display='block'; 
+                      window.location.href="mainpage.html";
+                  // ...
+              })
+                .catch((error) => {
+                  const errorCode = error.code;
+                  const errorMessage = error.message;
+                  console.log('login failed');
+                  icd.style.display='block';
+                  // ..
+                });
+
+              });
+
+ 
+
+              //////////////////
+
+        
+    </script>
+  </body>
+</html>

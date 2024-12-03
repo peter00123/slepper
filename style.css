@@ -1,0 +1,238 @@
+
+body {
+    background-color: #000;
+    color: #fff;
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0; /* Added padding for better spacing on mobile */
+    padding-left: 5%;
+    font: caption;
+    touch-action: manipulation;
+  }
+  
+  h1 {
+    margin: 10px 0; /* Adjusted margins */
+    font-size: 44px; /* Responsive font size */
+   }
+   
+   h2 {
+     margin: 10px 0; /* Adjusted margins */
+     font-size: 20px; /* Responsive font size */
+    }
+    
+    h3 {
+      margin: 5px 0; /* Adjusted margins */
+      font-size: 18px; /* Responsive font size */
+    }
+    
+    header {
+      position: sticky;
+  
+    }
+
+  .welcometag{
+    display: flex;
+    justify-content: start;
+  }
+  .topbar{
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px; /* Added padding for better spacing */
+  }
+
+  
+  
+  /*/////////////////////////////.........................//////////////////*/
+  .status{
+    margin: 5%;
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+.week {
+  width: 50px;       /* Width of Box B */
+  height: 100px;      /* Height of Box B */
+  position: relative; /* Allows Box A to be positioned within */
+  background-color: lightblue;
+  border-radius: 10%;
+}
+
+.weekvalue {
+  width: 100%;         /* Box A covers 50% of Box B's width */
+  background-color: coral;
+  position: absolute; /* Position inside Box B */
+  bottom: 0;
+  left: 0;
+  
+}
+
+.month {
+  width: 50px;       /* Width of Box B */
+  height: 100px;      /* Height of Box B */
+  position: relative; /* Allows Box A to be positioned within */
+  background-color: lightblue;
+  border-radius: 10%;
+}
+
+.monthvalue {
+  width: 100%;         /* Box A covers 50% of Box B's width */
+  background-color: coral;
+  position: absolute; /* Position inside Box B */
+  bottom: 0;
+  left: 0;
+}
+.day {
+  width: 50px;       /* Width of Box B */
+  height: 100px;      /* Height of Box B */
+  position: relative; /* Allows Box A to be positioned within */
+  background-color: lightblue;
+  border-radius: 10%;
+}
+
+.dayvalue {
+  width: 100%;         /* Box A covers 50% of Box B's width */
+  background-color: coral;
+  position: absolute; /* Position inside Box B */
+  bottom: 0;
+  left: 0;
+}
+/*////////////////////////////////////////*/
+.bottom-nav {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #0f0f0f;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+}
+
+.icon{
+  width: 24px;
+  height: 24px;
+  
+}
+
+
+
+/* .........timer...............*/
+
+.container {
+  background-color: #1e1e1e; /* Dark background for the container */
+  width: 90%;
+  padding: 10px 0;
+  padding-bottom: 10px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* Slightly darker shadow */
+  margin: 0 auto;
+}
+
+.timer-display {
+  width: 85%;
+  /*background: #2a2a2a;  Dark background for timer display */
+  font-family: 'Roboto mono', monospace;
+  color: #ffffff; /* White text for better contrast */
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 5px;
+  /*box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);  Lighter shadow for contrast */
+}
+
+.buttons {
+  width: 90%;
+  margin: 60px auto 0 auto;
+  display: flex;
+  justify-content: space-around;
+}
+
+.buttons button {
+  width: 3  0%;
+  height: 45px;
+  background-color: #5a5a5a; /* Darker button background */
+  color: #ffffff; /* White text for buttons */
+  border: none;
+  font-family: 'Poppins', sans-serif;
+  font-size: 18px;
+  border-radius: 5px;
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.buttons button:nth-last-child(2) {
+  background-color: #d45d0d; /* Dark orange for second last button */
+}
+
+.buttons button:nth-last-child(1) {
+  background-color: #e6e600; /* Bright yellow for last button */
+}
+
+.buttons button:hover {
+  background-color: #7a7a7a; /* Lighter gray on hover */
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.3); /* Light shadow on hover */
+}
+
+
+/************************image card */
+
+
+.image-container {
+  display: flex;
+  overflow-x: auto; /* Enables horizontal scrolling */
+  scroll-snap-type: x mandatory; /* Snap to each card */
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+  padding: 50px;
+}
+
+.image-card {
+  min-width: 100vw; /* Each card takes full viewport width */
+  scroll-snap-align: start; /* Aligns the start of the card */
+}
+
+.image-card img {
+  
+  border-radius: 30px;
+  width: 90%; /* Makes the image responsive */
+  height: 90% ; /* Maintains aspect ratio */
+  
+}
+
+
+/*******************/
+.ppage{
+  display: flex;
+  justify-content: space-between;
+}
+
+.profile{
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  align-items: self-start;
+}
+
+.profileimg{
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin: 10px;
+  object-fit: cover;
+  object-position: center;
+}

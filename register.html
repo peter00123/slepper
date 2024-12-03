@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="authstyle.css">
+    <link rel="icon" href="path/to/your/favicon.ico" type="image/x-icon">
+  </head>
+  <body>
+    <form class="container" id="login-form">
+      <h2>Register</h2>
+      <label id="log"></label>
+      <input
+        type="username"
+        id="username"
+        name="username"
+        placeholder="username"
+      />
+      <input type="name" id="name" name="name" placeholder="name" />
+      <input type="age" id="age" name="age" placeholder="age" />
+      <input type="email" id="email" placeholder="Email" required />
+      <input type="password" id="password" placeholder="Password" required />
+      <button type="submit" id="reg">login</button>
+      <div style="margin-top: 5%">
+        <label>already have an account...</label>
+        <a href="login.html">login</a>
+      </div>
+    </form>
+    <script type="module" >
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+      import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+      import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js";
+      import {getFirestore,doc,setDoc} from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+
+
+      const firebaseConfig = {
+    apiKey: "AIzaSyCnImhv11CepvfX4pSIsNwKbCPwu6df_6Q",
+    authDomain: "sleeper-ad2ef.firebaseapp.com",
+    projectId: "sleeper-ad2ef",
+    storageBucket: "sleeper-ad2ef.firebasestorage.app",
+    messagingSenderId: "319629128838",
+    appId: "1:319629128838:web:a9ca546bcf2acfd6160d07"
+  };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app)
+
+      const reg = document.getElementById('reg');
+      
+      
+      reg.addEventListener("click",function(event){
+          event.preventDefault()
+
+          const password = document.getElementById('password').value;
+          const email = document.getElementById('email').value;
+          const name = document.getElementById('name').value;
+          const age = document.getElementById('age').value;
+          const username = document.getElementById('username').value;
+
+
+          const auth = getAuth();
+          createUserWithEmailAndPassword(auth, email, password)
+          .then(async(userCredential) => {
+              // Signed up
+              const user = userCredential.user;
+              
+              const userDocRef = doc(db,'users',user.uid);
+              await setDoc(userDocRef, {
+            username: username,
+            email: email,
+            name: name,
+            age: age,
+        });
+
+              alert("account creating")
+              window.location.href="mainpage.html";
+          // ...
+      })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.log('register failed')
+          // ..
+        });
+
+      })
+
+
+      
+    </script>
+  </body>
+</html>

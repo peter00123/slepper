@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <header>
+        <div class="topbar">
+        <h1>analysis</h1>
+     </header>
+
+
+
+     <div class="status">
+        <div class="month">
+          <div class="monthvalue" id="monthvalue"></div>
+        </div>
+        <div class="week">
+          <div class="weekvalue" id="weekvalue"></div>
+        </div>
+        <div class="day">
+          <div class="dayvalue" id="dayvalue"></div>
+        </div>
+      </div>
+
+
+      <div class="bottom-nav">
+        <div class="nav-item" onclick="navigateTo('mainpage.html')">
+          <img class="icon" src="assets/home.png" alt="Home Icon" />
+          <span>Home</span>
+        </div>
+        <div class="nav-item" >
+          <img class="icon" src="assets/analysisglow.png" alt="Analysis Icon" />
+          <span style="color: aqua;">Analysis</span>
+        </div>
+        <div class="nav-item" >
+          <i class="fas fa-plus-circle icon"></i>
+          <span>Add</span>
+        </div>
+        <div class="nav-item" onclick="navigateTo('profile.html')">
+          <img class="icon" src="assets/user.png" alt="Profile Icon" />
+          <span>Profile</span>
+        </div>
+      </div>
+</body>
+
+<script>
+  function navigateTo(page) {
+            console.log(page);
+            window.location.href = page; // Navigate to the specified page
+        };
+  </script>
+  <script type="module">
+     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+      import {
+        getAuth,
+        onAuthStateChanged,
+        signOut,
+      } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+      import { getFirestore } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+      import {
+        doc,
+        getDoc,
+        setDoc,
+        collection,
+      } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+
+      // Your web app's Firebase configuration
+      const firebaseConfig = {
+    apiKey: "AIzaSyCnImhv11CepvfX4pSIsNwKbCPwu6df_6Q",
+    authDomain: "sleeper-ad2ef.firebaseapp.com",
+    projectId: "sleeper-ad2ef",
+    storageBucket: "sleeper-ad2ef.firebasestorage.app",
+    messagingSenderId: "319629128838",
+    appId: "1:319629128838:web:a9ca546bcf2acfd6160d07"
+  };
+
+       ////////////////////////////////////////////////////////// Initialize Firebase
+       const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
+      const db = getFirestore(app);
+      const user = auth.currentUser;
+      console.log(db);
+      ///////////////////................................///
+
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          const userId = user.uid; // This is the user ID
+                console.log('User  ID:', userId);
+        } else {
+          window.location.herf = "register.html";
+        }
+      });
+
+/////////////////////////........................///////////
+
+if (userId) {
+        // Reference to the user's document in the Firestore 'users' collection
+        const userDocRef = doc(db, "users", userId); // Assuming 'users' is the collection name
+
+        // Function to fetch user data
+        async function fetchUserData(userId) {
+          try {
+            const userDoc = await getDoc(userDocRef);
+            if (userDoc.exists()) {
+              // User data retrieved successfully
+              const userData = userDoc.data();
+              console.log("User  data:", userData);
+              // You can now use userData to display on the page or for other logic
+              document.getElementById(
+                "user-info"
+              ).innerText = ` ${userData.name}`;
+
+              const boxw = document.getElementById("weekvalue");
+              const boxd = document.getElementById("dayvalue");
+              const boxm = document.getElementById("monthvalue");
+              var heightw = `${userData.w}` + "%";
+              var heightd = `${userData.d}` + "%";
+              var heightm = `${userData.m}` + "%";
+
+              var sleeping = `${userData.sleeping}`;
+              if (sleeping != "true") {
+                document.getElementById("start").style.display = "block";
+              } else {
+                document.getElementById("stop").style.display = "block";
+                console.log(sleeping);
+                // Show the Start button
+              }
+              boxd.style.height = heightd; // Change height
+              boxm.style.height = heightm; // Change height
+              boxw.style.height = heightw; // Change height
+              console.log(heightd);
+              console.log(heightm);
+              console.log(heightw);
+            } else {
+              console.log("No such document!");
+            }
+          } catch (error) {
+            console.error("Error fetching user data:", error);
+          }
+        }
+      }
+  </script>
+</html>

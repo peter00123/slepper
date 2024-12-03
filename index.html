@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Index</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: black;
+        }
+    
+        .loader {
+            border: 16px solid #f3f3f3; /* Light grey */
+            border-top: 16px solid #3498db; /* Blue */
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 2s linear infinite;
+        }
+    
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="loader"></div>
+</body>
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+   
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+  
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+    apiKey: "AIzaSyCnImhv11CepvfX4pSIsNwKbCPwu6df_6Q",
+    authDomain: "sleeper-ad2ef.firebaseapp.com",
+    projectId: "sleeper-ad2ef",
+    storageBucket: "sleeper-ad2ef.firebasestorage.app",
+    messagingSenderId: "319629128838",
+    appId: "1:319629128838:web:a9ca546bcf2acfd6160d07"
+  };
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app); // Initialize Auth
+    
+
+  
+    window.onload = function() {
+        onAuthStateChanged(auth, (user) => { // Use the imported onAuthStateChanged
+            if (user) {
+                // User is logged in, redirect to main page
+                window.location.href = "mainpage.html";
+            } else {
+                // User not logged in, redirect to register page
+                window.location.href = "login.html";
+            }
+            });
+        }
+    </script>
+
+</html>
